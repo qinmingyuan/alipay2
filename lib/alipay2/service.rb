@@ -1,7 +1,8 @@
 
 module Alipay
   module Service
-    autoload :Open, 'alipay/service/open'
+    autoload :Open, 'alipay2/service/open'
+    autoload :Auth, 'alipay2/service/auth'
     class Base
       class << self
 

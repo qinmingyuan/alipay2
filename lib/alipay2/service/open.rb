@@ -25,7 +25,7 @@ module Alipay
           :subject
         ]
         def trade_page_pay(params, options = {})
-          params.merge!(product_code: 'FAST_INSTANT_TRADE_PAY')
+          params = { product_code: 'FAST_INSTANT_TRADE_PAY' }.merge(params)
           Alipay::Utils.check_params(params, TRADE_PAGE_PAY_REQUIRED)
 
           options.merge!(method: 'alipay.trade.page.pay')
