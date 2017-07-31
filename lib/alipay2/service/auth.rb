@@ -35,7 +35,7 @@ module Alipay
                          pid: Alipay.config.partner.pid,
                          product_id: 'APP_FAST_LOGIN',
                          scope: 'kuaijie',
-                         target_id: Alipay::Utils.generate_batch_no,
+                         target_id: Alipay.config.app.target_id,
                          auth_type: 'AUTHACCOUNT'
 
           )

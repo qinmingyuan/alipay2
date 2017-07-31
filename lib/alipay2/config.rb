@@ -16,6 +16,7 @@ module Alipay
     config.partner.gateway_url = 'https://mapi.alipay.com/gateway.do'
 
     config.app.appid = nil
+    config.app.target_id = nil
     config.app.gateway_url = 'https://openapi.alipay.com/gateway.do'
     config.app.return_url = nil
     config.app.rsa2_pem = 'config/alipay_rsa2.pem'
