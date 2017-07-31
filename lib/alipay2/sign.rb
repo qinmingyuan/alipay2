@@ -10,7 +10,7 @@ module Alipay
     def generate(params, options = {})
       sign_type = params[:sign_type]
       params = params.dup
-      ['sign', 'sign_type'].each { |key| params.delete(key) }
+      [:sign].each { |key| params.delete(key) }
 
       string = Utils.params_to_string(params)
 
