@@ -25,7 +25,7 @@ module Alipay
         key = options[:key] || Alipay.config.app.dsa_pem
         DSA.sign(key, string)
       when 'RSA2'
-        key = options[:key] || File.read(Alipay.config.app.rsa2_pem)
+        key = options[:key] || rsa2_key
         RSA2.sign(key, string)
       else
         raise ArgumentError, "invalid sign_type #{sign_type}, allow value: MD5, RSA, RSA2"
@@ -50,6 +50,10 @@ module Alipay
       else
         false
       end
+    end
+
+    def rsa2_key
+      File.read(Alipay.root.join Alipay.config.app.rsa2_pem)
     end
 
   end

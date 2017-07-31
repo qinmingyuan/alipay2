@@ -19,7 +19,7 @@ module Alipay
   if defined?(Rails)
     class Railtie < Rails::Railtie
       initializer 'alipay.setup_paths' do |app|
-        Alipay.root = Rails.root.to_s
+        Alipay.root = Rails.root
       end
     end
   end
