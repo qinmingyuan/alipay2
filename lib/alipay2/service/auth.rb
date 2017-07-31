@@ -25,6 +25,22 @@ module Alipay
           process_params(params, options)
         end
 
+
+        def open_auth_sdk_code_get_params(params = {}, options = {})
+          options.merge!(apiname: 'com.alipay.account.auth',
+                         method: 'alipay.open.auth.sdk.code.get',
+                         app_name: 'mc',
+                         biz_type: 'openservice',
+                         pid: Alipay.config.partner.pid,
+                         product_id: 'APP_FAST_LOGIN',
+                         scope: 'kuaijie',
+                         target_id: Alipay::Utils.generate_batch_no,
+                         auth_type: 'AUTHACCOUNT'
+
+          )
+          process_params(params, options)
+        end
+
       end
     end
   end

@@ -27,7 +27,7 @@ module Alipay
         def process_params(params, options ={})
           result = {}
           result.merge! common_params(options)
-          result.merge! biz_content: params
+          result.merge! biz_content: params if params.size >= 1
           result.merge! sign_params(result)
           result
         end
