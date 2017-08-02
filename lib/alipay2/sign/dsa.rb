@@ -1,6 +1,7 @@
 module Alipay
   module Sign
-    class DSA
+    module DSA
+      extend self
 
       def self.sign(key, string)
         raise NotImplementedError, 'DSA sign is not implemented'
