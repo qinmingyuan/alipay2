@@ -26,7 +26,13 @@ module Alipay
       uri.to_s
     end
 
-    def process_params(params, options ={})
+    def sdk_execute(params)
+      params = prepare_params(params)
+
+      URI.encode_www_form(params)
+    end
+
+    def prepare_params(params, options ={})
       result = {}
       result.merge! common_params(options)
       result.merge! biz_content: params if params.size >= 1
