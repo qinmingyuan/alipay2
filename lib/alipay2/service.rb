@@ -9,17 +9,13 @@ module Alipay
     extend Auth
     extend Open
 
-    def account_page_query(params, options = {})
-      params = {
-        service: 'account.page.query',
-        _input_charset: 'utf-8',
-        partner: options[:pid] || Alipay.pid,
-      }.merge(params)
+    def execute(params, options = {})
+      params = prepare_params(params)
 
-      Net::HTTP.get(request_uri(params))
+      Net::HTTP.post_form(URI(@url), params).body
     end
 
-    def request_uri(params, options = {})
+    def page_execute_url(params, options = {})
       params = prepare_params(params, options)
 
       uri = URI(Alipay.config.app.gateway_url)
@@ -27,7 +23,7 @@ module Alipay
       uri.to_s
     end
 
-    def sdk_execute(params)
+    def sdk_execute(params, options = {})
       params = prepare_params(params)
 
       URI.encode_www_form(params)

@@ -35,7 +35,6 @@ module Alipay
                        scope: 'kuaijie',
                        target_id: Alipay.config.app.target_id || options[:target_id],
                        auth_type: 'AUTHACCOUNT'
-
         )
         options.merge! sign_params(options)
         URI.encode_www_form(options)
