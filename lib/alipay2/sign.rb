@@ -1,4 +1,3 @@
-require 'alipay2/sign/md5'
 require 'alipay2/sign/rsa'
 require 'alipay2/sign/rsa2'
 require 'alipay2/sign/dsa'

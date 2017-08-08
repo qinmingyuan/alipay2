@@ -5,6 +5,7 @@ require 'alipay2/service/auth'
 
 module Alipay
   module Service
+    extend self
     extend Auth
     extend Open
 
@@ -19,7 +20,7 @@ module Alipay
     end
 
     def request_uri(params, options = {})
-      params = process_params(params, options)
+      params = prepare_params(params, options)
 
       uri = URI(Alipay.config.app.gateway_url)
       uri.query = URI.encode_www_form(params)
