@@ -1,26 +1,30 @@
 # frozen_string_literal: true
 
-require 'alipay2/service/open'
+require 'alipay2/service/app'
+require 'alipay2/service/page'
+require 'alipay2/service/api'
 require 'alipay2/service/auth'
 
 module Alipay
   module Service
     extend self
-    extend Auth
-    extend Open
+    extend App
+    extend Page
+    extend Api
 
     def execute(params, options = {})
       params = prepare_params(params)
 
-      Net::HTTP.post_form(URI(@url), params).body
+      url = URI(Alipay.config.app.gateway_url)
+      Net::HTTP.post_form(url, params).body
     end
 
     def page_execute_url(params, options = {})
       params = prepare_params(params, options)
 
-      uri = URI(Alipay.config.app.gateway_url)
-      uri.query = URI.encode_www_form(params)
-      uri.to_s
+      url = URI(Alipay.config.app.gateway_url)
+      url.query = URI.encode_www_form(params)
+      url.to_s
     end
 
     def sdk_execute(params, options = {})
@@ -32,7 +36,7 @@ module Alipay
     def prepare_params(params, options ={})
       result = {}
       result.merge! common_params(options)
-      result.merge! biz_content: params if params.size >= 1
+      result.merge! biz_content: params.to_json if params.size >= 1
       result.merge! sign_params(result)
       result
     end
