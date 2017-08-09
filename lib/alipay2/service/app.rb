@@ -17,7 +17,7 @@ module Alipay
             params = #{api[:default]}.merge(params)
             Alipay::Utils.check_params(params, #{api[:required]})
             
-            params.merge!(method: '#{api[:method]}')
+            options.merge!(method: '#{api[:method]}')
             sdk_execute(params, options)
           end
         RUBY_EVAL

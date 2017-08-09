@@ -13,7 +13,7 @@ module Alipay
     extend Api
 
     def execute(params, options = {})
-      params = prepare_params(params)
+      params = prepare_params(params, options)
 
       url = URI(Alipay.config.app.gateway_url)
       Net::HTTP.post_form(url, params).body
@@ -28,7 +28,7 @@ module Alipay
     end
 
     def sdk_execute(params, options = {})
-      params = prepare_params(params)
+      params = prepare_params(params, options)
 
       URI.encode_www_form(params)
     end
