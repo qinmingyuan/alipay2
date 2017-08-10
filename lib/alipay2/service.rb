@@ -11,6 +11,7 @@ module Alipay
     extend App
     extend Page
     extend Api
+    extend Auth
 
     def execute(params, options = {})
       params = prepare_params(params, options)
