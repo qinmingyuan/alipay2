@@ -28,24 +28,25 @@ module Alipay
       end
     end
 
-    def verify?(params, options = {})
-      params = Utils.stringify_keys(params)
-
+    def verify?(params)
       sign_type = params.delete('sign_type')
       sign = params.delete('sign')
-      string = params_to_string(params)
+      string = Utils.params_to_string(params)
 
       case sign_type
-      when 'MD5'
-        key = options[:key] || Alipay.key
-        MD5.verify?(key, string, sign)
       when 'RSA'
-        RSA.verify?(Alipay.app.return_rsa, string, sign)
+        RSA.verify?(return_rsa, string, sign)
+      when 'RSA2'
+        RSA2.verify?(return_rsa, string, sign)
       when 'DSA'
         DSA.verify?(string, sign)
       else
         false
       end
+    end
+
+    def return_rsa
+      @return_rsa ||= "-----BEGIN PUBLIC KEY-----\n" + Alipay.config.return_rsa + "\n-----END PUBLIC KEY-----"
     end
 
     def rsa2_key

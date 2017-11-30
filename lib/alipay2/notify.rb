@@ -2,10 +2,8 @@ module Alipay
   module Notify
     extend self
 
-    def verify?(params, options = {})
-      params = Utils.stringify_keys(params)
-      pid = options[:pid] || Alipay.pid
-      Sign.verify?(params, options) && verify_notify_id?(pid, params['notify_id'])
+    def verify?(params)
+      Sign.verify?(params) && verify_notify_id?(pid, params['notify_id'])
     end
 
     def verify_notify_id?(pid, notify_id)

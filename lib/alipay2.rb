@@ -6,6 +6,7 @@ require 'alipay2/config'
 require 'alipay2/utils'
 require 'alipay2/sign'
 require 'alipay2/service'
+require 'alipay2/notify'
 
 module Alipay
   attr_accessor :root
