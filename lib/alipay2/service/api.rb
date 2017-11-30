@@ -24,6 +24,11 @@ module Alipay
           method: 'alipay.user.info.share',
           required: [],
           default: {}
+        },
+        trade_refund: {
+          method: 'alipay.trade.refund',
+          default: {},
+          required: [:out_trade_no, :refund_amount]
         }
       }
 
