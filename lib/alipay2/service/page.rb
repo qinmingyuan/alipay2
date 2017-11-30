@@ -14,9 +14,13 @@ module Alipay
           method: 'alipay.trade.page.pay',
           default: { product_code: 'FAST_INSTANT_TRADE_PAY' },
           required: [:out_trade_no, :product_code, :total_amount, :subject]
+        },
+        trade_refund: {
+          method: 'alipay.trade.refund',
+          default: {},
+          required: [:out_trade_no, :refund_amount]
         }
       }
-
 
       API.each do |key, api|
         class_eval <<-RUBY_EVAL, __FILE__, __LINE__ + 1

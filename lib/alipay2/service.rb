@@ -16,14 +16,14 @@ module Alipay
     def execute(params, options = {})
       params = prepare_params(params, options)
 
-      url = URI(Alipay.config.app.gateway_url)
+      url = URI(Alipay.config.gateway_url)
       Net::HTTP.post_form(url, params).body
     end
 
     def page_execute_url(params, options = {})
       params = prepare_params(params, options)
 
-      url = URI(Alipay.config.app.gateway_url)
+      url = URI(Alipay.config.gateway_url)
       url.query = URI.encode_www_form(params)
       url.to_s
     end
@@ -43,9 +43,9 @@ module Alipay
     end
 
     def common_params(params)
-      params[:app_id] ||= Alipay.config.app.appid
-      params[:return_url] ||= Alipay.config.app.return_url if Alipay.config.app.return_url
-      params[:notify_url] ||= Alipay.config.app.notify_url if Alipay.config.app.notify_url
+      params[:app_id] ||= Alipay.config.appid
+      params[:return_url] ||= Alipay.config.return_url if Alipay.config.return_url
+      params[:notify_url] ||= Alipay.config.notify_url if Alipay.config.notify_url
       params.merge!(
         charset: 'utf-8',
         timestamp: Alipay::Utils.timestamp,
