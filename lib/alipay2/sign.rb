@@ -1,6 +1,5 @@
 require 'alipay2/sign/rsa'
 require 'alipay2/sign/rsa2'
-require 'alipay2/sign/dsa'
 
 module Alipay
   module Sign
@@ -17,9 +16,6 @@ module Alipay
       when 'RSA'
         key = options[:key] || Alipay.config.rsa_pem
         RSA.sign(key, string)
-      when 'DSA'
-        key = options[:key] || Alipay.config.dsa_pem
-        DSA.sign(key, string)
       when 'RSA2'
         key = options[:key] || rsa2_key
         RSA2.sign(key, string)
@@ -38,8 +34,6 @@ module Alipay
         RSA.verify?(return_rsa, string, sign)
       when 'RSA2'
         RSA2.verify?(return_rsa, string, sign)
-      when 'DSA'
-        DSA.verify?(string, sign)
       else
         false
       end

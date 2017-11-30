@@ -6,13 +6,6 @@ module Alipay
     module RSA2
       extend self
 
-      def generate(params, options = {})
-        params = Alipay::Utils.stringify_keys(params)
-        ['sign', 'sign_type'].each { |key| params.delete(key) }
-
-        Alipay::Utils.params_to_string(params)
-      end
-
       def sign(key, string)
         digest = OpenSSL::Digest::SHA256.new
         pkey = OpenSSL::PKey::RSA.new(key)
