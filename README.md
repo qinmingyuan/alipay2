@@ -3,7 +3,6 @@ A unofficial alipay ruby gem.
 
 Alipay official document: https://doc.open.alipay.com/.
 
-本项目基于 [Rei](https://github.com/chloerei) 的[版本](https://github.com/chloerei/alipay)，主要是支持新版api.
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -143,8 +142,3 @@ Bug report or pull request are welcome.
 5. Create new Pull Request
 
 Please write unit test with your code if necessary.
-
-## Donate
-Donate to maintainer let him make this gem better.
-
-Alipay donate link: http://chloerei.com/donate/ .
