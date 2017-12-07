@@ -5,6 +5,7 @@ module Alipay
 
   configure do |config|
     config.debug_mode = true
+    config.pid = nil
     config.appid = nil
     config.target_id = nil
     config.gateway_url = 'https://openapi.alipay.com/gateway.do'
