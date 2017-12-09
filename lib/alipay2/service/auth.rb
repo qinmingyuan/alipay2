@@ -40,6 +40,17 @@ module Alipay
         URI.encode_www_form(options)
       end
 
+      def oauth_url
+        params = {
+          app_id: Alipay.config.appid,
+          redirect_uri: Alipay.config.oauth_callback
+        }
+
+        url = URI(Alipay.config.oauth_url)
+        url.query = URI.encode_www_form(params)
+        url.to_s
+      end
+
     end
   end
 end
