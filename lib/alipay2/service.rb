@@ -34,23 +34,23 @@ module Alipay
       URI.encode_www_form(params)
     end
 
-    def prepare_params(params, options ={})
+    def prepare_params(params, options = {})
       result = {}
-      result.merge! common_params(options)
-      result.merge! biz_content: params.to_json if params.size >= 1
+      result.merge! common_params(options, params)
+      result[:biz_content] = params.to_json if params.size >= 1
       result.merge! sign_params(result)
       result
     end
 
-    def common_params(params)
+    def common_params(params, extra = {})
       params[:app_id] ||= Alipay.config.appid
-      params[:return_url] ||= Alipay.config.return_url if Alipay.config.return_url
-      params[:notify_url] ||= Alipay.config.notify_url if Alipay.config.notify_url
+      params[:return_url] ||= extra.fetch('return_url', Alipay.config.return_url)
+      params[:notify_url] ||= extra.fetch('notify_url', Alipay.config.notify_url)
       params.merge!(
         charset: 'utf-8',
         timestamp: Alipay::Utils.timestamp,
         version: '1.0',
-        format: 'JSON'  # optional
+        format: 'JSON' # optional
       )
     end
 
@@ -59,6 +59,5 @@ module Alipay
       params[:sign] = Alipay::Sign.generate(params)
       params
     end
-
   end
 end
