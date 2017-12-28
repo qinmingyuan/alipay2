@@ -21,7 +21,7 @@ module Alipay
     end
 
     def page_execute_url(params, options = {})
-      params = prepare_params(params, options)
+      params = prepare_page_params(params, options)
 
       url = URI(Alipay.config.gateway_url)
       url.query = URI.encode_www_form(params)
@@ -34,18 +34,27 @@ module Alipay
       URI.encode_www_form(params)
     end
 
-    def prepare_params(params, options = {})
-      result = {}
-      result.merge! common_params(options, params)
+    def prepare_page_params(params, options = {})
+      result = {return_url: params.fetch(:return_url, Alipay.config.return_url),
+                notify_url: params.fetch(:notify_url, Alipay.config.notify_url)}
+      result.merge! common_params(options)
+
       result[:biz_content] = params.to_json if params.size >= 1
       result.merge! sign_params(result)
       result
     end
 
-    def common_params(params, extra = {})
+    def prepare_params(params, options = {})
+      result = {}
+      result.merge! common_params(options)
+      result[:biz_content] = params.to_json if params.size >= 1
+      result.merge! sign_params(result)
+      result
+    end
+
+    def common_params(params)
       params[:app_id] ||= Alipay.config.appid
-      params[:return_url] ||= extra.fetch(:return_url, Alipay.config.return_url)
-      params[:notify_url] ||= extra.fetch(:notify_url, Alipay.config.notify_url)
+
       params.merge!(
         charset: 'utf-8',
         timestamp: Alipay::Utils.timestamp,
