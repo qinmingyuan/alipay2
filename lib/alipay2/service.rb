@@ -44,8 +44,8 @@ module Alipay
 
     def common_params(params, extra = {})
       params[:app_id] ||= Alipay.config.appid
-      params[:return_url] ||= extra.fetch('return_url', Alipay.config.return_url)
-      params[:notify_url] ||= extra.fetch('notify_url', Alipay.config.notify_url)
+      params[:return_url] ||= extra.fetch(:return_url, Alipay.config.return_url)
+      params[:notify_url] ||= extra.fetch(:notify_url, Alipay.config.notify_url)
       params.merge!(
         charset: 'utf-8',
         timestamp: Alipay::Utils.timestamp,
