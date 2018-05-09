@@ -1,4 +1,4 @@
-module Alipay
+module Alipay2
   module Utils
     extend self
 
@@ -25,10 +25,10 @@ module Alipay
     def check_params(params, required, optional = nil)
       lost = (required - params.keys)
 
-      raise("Alipay Warn: missing required params: #{lost.join(', ')}")  if lost.size >= 1
+      raise("Alipay2 Warn: missing required params: #{lost.join(', ')}")  if lost.size >= 1
 
 
-      #raise("Alipay Warn: must specify either #{optional.join(' or ')}") if optional.all? { |name| params[name].nil? }
+      #raise("Alipay2 Warn: must specify either #{optional.join(' or ')}") if optional.all? { |name| params[name].nil? }
     end
 
   end

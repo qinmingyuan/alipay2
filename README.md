@@ -1,7 +1,7 @@
-# Alipay
+# Alipay2
 A unofficial alipay ruby gem.
 
-Alipay official document: https://doc.open.alipay.com/.
+Alipay2 official document: https://doc.open.alipay.com/.
 
 
 ## Installation
@@ -20,11 +20,11 @@ $ bundle
 ## Configuration
 
 ```ruby
-Alipay.pid = 'YOUR_PID'
-Alipay.key = 'YOUR_KEY'
+Alipay2.pid = 'YOUR_PID'
+Alipay2.key = 'YOUR_KEY'
 
-#Alipay.sign_type = 'MD5' # Available values: MD5, RSA. Default is MD5
-#Alipay.debug_mode = true # Enable parameter check. Default is true.
+#Alipay2.sign_type = 'MD5' # Available values: MD5, RSA. Default is MD5
+#Alipay2.debug_mode = true # Enable parameter check. Default is true.
 ```
 
 You can set default key, or pass a key directly to service method:
@@ -70,13 +70,13 @@ Service.create_partner_trade_by_buyer_url({
 | subject | required | Order subject. |
 | total_fee | required | Order’s total fee. |
 | return_url | optional | Redirect customer to this url after payment. |
-| notify_url | optional | Alipay asyn notify url. |
+| notify_url | optional | Alipay2 asyn notify url. |
 
 ```ruby
 # Usage
-Alipay::Service.create_direct_pay_by_user_url(arguments, options = {})
+Alipay2::Service.create_direct_pay_by_user_url(arguments, options = {})
 # Example
-Alipay::Service.create_direct_pay_by_user_url(
+Alipay2::Service.create_direct_pay_by_user_url(
   out_trade_no: '20150401000-0001',
   subject: 'Order Name',
   total_fee: '10.00',
@@ -94,7 +94,7 @@ https://doc.open.alipay.com/docs/doc.htm?treeId=62&articleId=104744&docType=1
 | --- | --- | --- |
 | batch_no | required | Refund batch no, you should store it to db to avoid alipay duplicate refund. |
 | data | required | Refund data, a hash array. |
-| notify_url | required | Alipay notify url. |
+| notify_url | required | Alipay2 notify url. |
 
 ##### Data Item
 | Key | Requirement | Description |
@@ -107,8 +107,8 @@ https://doc.open.alipay.com/docs/doc.htm?treeId=62&articleId=104744&docType=1
 
 ```ruby
 # Usage example
-batch_no = Alipay::Utils.generate_batch_no # refund batch no, you SHOULD store it to db to avoid alipay duplicate refund
-Alipay::Service.refund_fastpay_by_platform_pwd_url(
+batch_no = Alipay2::Utils.generate_batch_no # refund batch no, you SHOULD store it to db to avoid alipay duplicate refund
+Alipay2::Service.refund_fastpay_by_platform_pwd_url(
   batch_no: batch_no,
   data: [{
     trade_no: '201504010000001',
@@ -127,7 +127,7 @@ Alipay::Service.refund_fastpay_by_platform_pwd_url(
 # Rails
 # params except :controller_name, :action_name, :host, etc.
 notify_params = params.except(*request.path_parameters.keys)
-Alipay::Wap::Notify.verify?(notify_params)
+Alipay2::Wap::Notify.verify?(notify_params)
 ```
 
 ## Contributing

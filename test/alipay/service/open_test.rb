@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Alipay::Wap::NotifyTest < Minitest::Test
+class Alipay2::Wap::NotifyTest < Minitest::Test
 
 
 

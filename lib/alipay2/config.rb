@@ -1,6 +1,6 @@
 require 'active_support/configurable'
 
-module Alipay
+module Alipay2
   include ActiveSupport::Configurable
 
   configure do |config|

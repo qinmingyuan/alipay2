@@ -5,7 +5,7 @@ require 'alipay2/service/page'
 require 'alipay2/service/api'
 require 'alipay2/service/auth'
 
-module Alipay
+module Alipay2
   module Service
     extend self
     extend App
@@ -16,14 +16,14 @@ module Alipay
     def execute(params, options = {})
       params = prepare_params(params, options)
 
-      url = URI(Alipay.config.gateway_url)
+      url = URI(Alipay2.config.gateway_url)
       Net::HTTP.post_form(url, params).body
     end
 
     def page_execute_url(params, options = {})
       params = prepare_params(params, options)
 
-      url = URI(Alipay.config.gateway_url)
+      url = URI(Alipay2.config.gateway_url)
       url.query = URI.encode_www_form(params)
       url.to_s
     end
@@ -43,12 +43,12 @@ module Alipay
     end
 
     def common_params(params)
-      params[:app_id] ||= Alipay.config.appid
-      params[:return_url] ||= Alipay.config.return_url if Alipay.config.return_url
-      params[:notify_url] ||= Alipay.config.notify_url if Alipay.config.notify_url
+      params[:app_id] ||= Alipay2.config.appid
+      params[:return_url] ||= Alipay2.config.return_url if Alipay2.config.return_url
+      params[:notify_url] ||= Alipay2.config.notify_url if Alipay2.config.notify_url
       params.merge!(
         charset: 'utf-8',
-        timestamp: Alipay::Utils.timestamp,
+        timestamp: Alipay2::Utils.timestamp,
         version: '1.0',
         format: 'JSON'  # optional
       )
@@ -56,7 +56,7 @@ module Alipay
 
     def sign_params(params)
       params[:sign_type] ||= 'RSA2'
-      params[:sign] = Alipay::Sign.generate(params)
+      params[:sign] = Alipay2::Sign.generate(params)
       params
     end
 

@@ -1,4 +1,4 @@
-module Alipay
+module Alipay2
   module Notify
     extend self
 

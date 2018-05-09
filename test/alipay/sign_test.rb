@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Alipay::SignTest < Minitest::Test
+class Alipay2::SignTest < Minitest::Test
   def setup
     @params = {
       service: 'test',
@@ -13,18 +13,18 @@ class Alipay::SignTest < Minitest::Test
   end
 
   def test_generate_sign
-    assert_equal @md5_sign, Alipay::Sign.generate(@params)
-    assert_equal @md5_sign_2, Alipay::Sign.generate(@params, {key: @key_2})
+    assert_equal @md5_sign, Alipay2::Sign.generate(@params)
+    assert_equal @md5_sign_2, Alipay2::Sign.generate(@params, {key: @key_2})
   end
 
   def test_verify_sign
-    assert Alipay::Sign.verify?(@params.merge(sign_type: 'MD5', sign: @md5_sign))
-    assert Alipay::Sign.verify?(@params.merge(sign_type: 'MD5', sign: @md5_sign_2), {key: @key_2})
+    assert Alipay2::Sign.verify?(@params.merge(sign_type: 'MD5', sign: @md5_sign))
+    assert Alipay2::Sign.verify?(@params.merge(sign_type: 'MD5', sign: @md5_sign_2), {key: @key_2})
   end
 
   def test_verify_fail_when_sign_not_true
-    assert !Alipay::Sign.verify?(@params)
-    assert !Alipay::Sign.verify?(@params.merge(danger: 'danger', sign_type: 'MD5', sign: @md5_sign))
-    assert !Alipay::Sign.verify?(@params.merge(sign_type: 'MD5', sign: 'danger'))
+    assert !Alipay2::Sign.verify?(@params)
+    assert !Alipay2::Sign.verify?(@params.merge(danger: 'danger', sign_type: 'MD5', sign: @md5_sign))
+    assert !Alipay2::Sign.verify?(@params.merge(sign_type: 'MD5', sign: 'danger'))
   end
 end

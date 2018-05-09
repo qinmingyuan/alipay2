@@ -1,7 +1,7 @@
 require 'alipay2/sign/rsa'
 require 'alipay2/sign/rsa2'
 
-module Alipay
+module Alipay2
   module Sign
     extend self
 
@@ -14,7 +14,7 @@ module Alipay
 
       case sign_type
       when 'RSA'
-        key = options[:key] || Alipay.config.rsa_pem
+        key = options[:key] || Alipay2.config.rsa_pem
         RSA.sign(key, string)
       when 'RSA2'
         key = options[:key] || rsa2_key
@@ -40,11 +40,11 @@ module Alipay
     end
 
     def return_rsa
-      @return_rsa ||= "-----BEGIN PUBLIC KEY-----\n" + Alipay.config.return_rsa + "\n-----END PUBLIC KEY-----"
+      @return_rsa ||= "-----BEGIN PUBLIC KEY-----\n" + Alipay2.config.return_rsa + "\n-----END PUBLIC KEY-----"
     end
 
     def rsa2_key
-      File.read(Alipay.root.join Alipay.config.rsa2_pem)
+      File.read(Alipay2.root.join Alipay2.config.rsa2_pem)
     end
 
   end

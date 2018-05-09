@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Alipay::NotifyTest < Minitest::Test
+class Alipay2::NotifyTest < Minitest::Test
   def setup
     @params = {
       notify_id: '1234',
@@ -14,22 +14,22 @@ class Alipay::NotifyTest < Minitest::Test
 
   def test_unsign_notify
     stub_request(
-      :get, "https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{Alipay.pid}&notify_id=1234"
+      :get, "https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{Alipay2.pid}&notify_id=1234"
     ).to_return(body: "true")
-    assert !Alipay::Notify.verify?(@unsign_params)
+    assert !Alipay2::Notify.verify?(@unsign_params)
   end
 
   def test_verify_notify_when_true
     stub_request(
-      :get, "https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{Alipay.pid}&notify_id=1234"
+      :get, "https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{Alipay2.pid}&notify_id=1234"
     ).to_return(body: "true")
-    assert Alipay::Notify.verify?(@sign_params)
+    assert Alipay2::Notify.verify?(@sign_params)
   end
 
   def test_verify_notify_when_false
     stub_request(
-      :get, "https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{Alipay.pid}&notify_id=1234"
+      :get, "https://mapi.alipay.com/gateway.do?service=notify_verify&partner=#{Alipay2.pid}&notify_id=1234"
     ).to_return(body: "false")
-    assert !Alipay::Notify.verify?(@sign_params)
+    assert !Alipay2::Notify.verify?(@sign_params)
   end
 end

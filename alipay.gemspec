@@ -4,7 +4,7 @@ require 'alipay2/version'
 
 Gem::Specification.new do |s|
   s.name          = 'alipay2'
-  s.version       = Alipay::VERSION
+  s.version       = Alipay2::VERSION
   s.authors       = ['qinmingyuan']
   s.email         = ['mingyuan0715@foxmail.com']
   s.description   = %q{An unofficial simple alipay gem}

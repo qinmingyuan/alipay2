@@ -2,8 +2,8 @@ require 'minitest/autorun'
 require 'alipay'
 require 'webmock/minitest'
 
-Alipay.pid = '1000000000000000'
-Alipay.key = '10000000000000000000000000000000'
+Alipay2.pid = '1000000000000000'
+Alipay2.key = '10000000000000000000000000000000'
 
 TEST_RSA_PUBLIC_KEY = <<EOF
 -----BEGIN PUBLIC KEY-----
