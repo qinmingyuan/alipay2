@@ -44,14 +44,13 @@ module Alipay2
     end
 
     def prepare_page_params(params, options = {})
-      result = {}
-      result.merge! return_url: params.fetch(:return_url, Alipay2.config.return_url)
-      result.merge! notify_url: params.fetch(:notify_url, Alipay2.config.notify_url)
+      result = {
+        return_url: params.fetch(:return_url, Alipay2.config.return_url),
+        notify_url: params.fetch(:notify_url, Alipay2.config.notify_url)
+      }
       result.compact!
       result.merge! common_params(options)
-
       result[:biz_content] = params.to_json if params.size >= 1
-      binding.pry
       result.merge! sign_params(result)
       result
     end
