@@ -36,12 +36,13 @@ module Alipay2
 
     def prepare_page_params(params, options = {})
       result = {
-        return_url: params.fetch(:return_url, Alipay.config.return_url),
-        notify_url: params.fetch(:notify_url, Alipay.config.notify_url)
+        return_url: params.fetch(:return_url, Alipay2.config.return_url),
+        notify_url: params.fetch(:notify_url, Alipay2.config.notify_url)
       }
       result.merge! common_params(options)
 
       result[:biz_content] = params.to_json if params.size >= 1
+      binding.pry
       result.merge! sign_params(result)
       result
     end
@@ -55,7 +56,7 @@ module Alipay2
     end
 
     def common_params(params)
-      params[:app_id] ||= Alipay.config.appid
+      params[:app_id] ||= Alipay2.config.appid
       params.merge!(
         charset: 'utf-8',
         timestamp: Alipay2::Utils.timestamp,

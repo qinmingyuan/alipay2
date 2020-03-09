@@ -43,6 +43,9 @@ module Alipay2
       @return_rsa ||= "-----BEGIN PUBLIC KEY-----\n" + Alipay2.config.return_rsa + "\n-----END PUBLIC KEY-----"
     end
 
+    # https://docs.open.alipay.com/291/106130
+    # openssl genrsa -out app_private_key.pem
+    # openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
     def rsa2_key
       File.read(Alipay2.root.join Alipay2.config.rsa2_pem)
     end
