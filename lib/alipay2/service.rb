@@ -21,7 +21,7 @@ module Alipay2
     end
 
     def page_execute_url(params, options = {})
-      params = prepare_params(params, options)
+      params = prepare_page_params(params, options)
 
       url = URI(Alipay2.config.gateway_url)
       url.query = URI.encode_www_form(params)
