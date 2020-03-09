@@ -13,17 +13,26 @@ module Alipay2
     extend Api
     extend Auth
 
+    def base_url
+      return @base_url if defined? @base_url
+      if Alipay2.config.sandbox
+        @base_url = URI('https://openapi.alipaydev.com/gateway.do')
+      else
+        @base_url = URI('https://openapi.alipay.com/gateway.do')
+      end
+    end
+
     def execute(params, options = {})
       params = prepare_params(params, options)
 
-      url = URI(Alipay2.config.gateway_url)
+      url = base_url
       Net::HTTP.post_form(url, params).body
     end
 
     def page_execute_url(params, options = {})
       params = prepare_page_params(params, options)
 
-      url = URI(Alipay2.config.gateway_url)
+      url = base_url
       url.query = URI.encode_www_form(params)
       url.to_s
     end
@@ -35,10 +44,10 @@ module Alipay2
     end
 
     def prepare_page_params(params, options = {})
-      result = {
-        return_url: params.fetch(:return_url, Alipay2.config.return_url),
-        notify_url: params.fetch(:notify_url, Alipay2.config.notify_url)
-      }
+      result = {}
+      result.merge! return_url: params.fetch(:return_url, Alipay2.config.return_url)
+      result.merge! notify_url: params.fetch(:notify_url, Alipay2.config.notify_url)
+      result.compact!
       result.merge! common_params(options)
 
       result[:biz_content] = params.to_json if params.size >= 1

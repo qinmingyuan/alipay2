@@ -12,10 +12,6 @@ module Alipay2
   attr_accessor :root
   extend self
 
-  def debug_mode?
-    Alipay2.config.debug_mode
-  end
-  
   if defined?(Rails)
     class Railtie < Rails::Railtie
       initializer 'alipay.setup_paths' do |app|

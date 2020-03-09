@@ -24,7 +24,7 @@ Alipay2.pid = 'YOUR_PID'
 Alipay2.key = 'YOUR_KEY'
 
 #Alipay2.sign_type = 'MD5' # Available values: MD5, RSA. Default is MD5
-#Alipay2.debug_mode = true # Enable parameter check. Default is true.
+#Alipay2.sandbox = true # Enable parameter check. Default is true.
 ```
 
 You can set default key, or pass a key directly to service method:

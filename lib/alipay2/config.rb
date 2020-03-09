@@ -4,11 +4,10 @@ module Alipay2
   include ActiveSupport::Configurable
 
   configure do |config|
-    config.debug_mode = true
+    config.sandbox = false
     config.pid = nil
     config.appid = nil
     config.target_id = nil
-    config.gateway_url = 'https://openapi.alipay.com/gateway.do'
     config.oauth_url = 'https://openauth.alipay.com/oauth2/appToAppAuth.htm'
     config.oauth_callback = nil
     config.return_url = nil
