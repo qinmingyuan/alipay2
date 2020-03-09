@@ -25,16 +25,17 @@ module Alipay2
       end
 
       def open_auth_sdk_code_get_params(params = {}, options = {})
-        options.merge!(apiname: 'com.alipay.account.auth',
-                       method: 'alipay.open.auth.sdk.code.get',
-                       app_id: Alipay2.config.appid,
-                       app_name: 'mc',
-                       biz_type: 'openservice',
-                       pid: Alipay2.config.pid,
-                       product_id: 'APP_FAST_LOGIN',
-                       scope: 'kuaijie',
-                       target_id: params[:target_id] || Alipay2::Utils.generate_batch_no,
-                       auth_type: 'AUTHACCOUNT'
+        options.merge!(
+          apiname: 'com.alipay.account.auth',
+          method: 'alipay.open.auth.sdk.code.get',
+          app_id: Alipay2.config.appid,
+          app_name: 'mc',
+          biz_type: 'openservice',
+          pid: Alipay2.config.pid,
+          product_id: 'APP_FAST_LOGIN',
+          scope: 'kuaijie',
+          target_id: params[:target_id] || Alipay2::Utils.generate_batch_no,
+          auth_type: 'AUTHACCOUNT'
         )
         options.merge! sign_params(options)
         URI.encode_www_form(options)
