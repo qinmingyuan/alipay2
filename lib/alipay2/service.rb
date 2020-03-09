@@ -34,18 +34,28 @@ module Alipay2
       URI.encode_www_form(params)
     end
 
-    def prepare_params(params, options ={})
+    def prepare_page_params(params, options = {})
+      result = {
+        return_url: params.fetch(:return_url, Alipay.config.return_url),
+        notify_url: params.fetch(:notify_url, Alipay.config.notify_url)
+      }
+      result.merge! common_params(options)
+
+      result[:biz_content] = params.to_json if params.size >= 1
+      result.merge! sign_params(result)
+      result
+    end
+
+    def prepare_params(params, options = {})
       result = {}
       result.merge! common_params(options)
-      result.merge! biz_content: params.to_json if params.size >= 1
+      result[:biz_content] = params.to_json if params.size >= 1
       result.merge! sign_params(result)
       result
     end
 
     def common_params(params)
-      params[:app_id] ||= Alipay2.config.appid
-      params[:return_url] ||= Alipay2.config.return_url if Alipay2.config.return_url
-      params[:notify_url] ||= Alipay2.config.notify_url if Alipay2.config.notify_url
+      params[:app_id] ||= Alipay.config.appid
       params.merge!(
         charset: 'utf-8',
         timestamp: Alipay2::Utils.timestamp,
@@ -59,6 +69,5 @@ module Alipay2
       params[:sign] = Alipay2::Sign.generate(params)
       params
     end
-
   end
 end
