@@ -12,6 +12,7 @@ module Alipay2
     config.oauth_callback = nil
     config.return_url = nil
     config.notify_url = nil
+    config.return_rsa = ''
     config.rsa2_pem = 'config/alipay_rsa2.pem'
     config.rsa_pem = 'config/alipay_rsa.pem'
   end
