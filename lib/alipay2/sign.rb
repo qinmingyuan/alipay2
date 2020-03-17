@@ -13,9 +13,6 @@ module Alipay2
       string = Utils.params_to_string(params)
 
       case sign_type
-      when 'RSA'
-        key = options[:key] || Alipay2.config.rsa_pem
-        RSA.sign(key, string)
       when 'RSA2'
         key = options[:key] || rsa2_key
         RSA2.sign(key, string)
@@ -44,15 +41,11 @@ module Alipay2
       @return_rsa = "-----BEGIN PUBLIC KEY-----\n" + Alipay2.config.return_rsa + "\n-----END PUBLIC KEY-----"
     end
 
-    def return_rsa_content
-
-    end
-
     # https://docs.open.alipay.com/291/106130
     # openssl genrsa -out app_private_key.pem
     # openssl rsa -in app_private_key.pem -pubout -out app_public_key.pem
     def rsa2_key
-      File.read(Alipay2.root.join Alipay2.config.rsa2_pem)
+      File.read(Alipay2.root.join Alipay2.config.rsa2_path)
     end
 
   end
