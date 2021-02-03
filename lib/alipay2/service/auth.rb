@@ -3,11 +3,11 @@
 module Alipay2
   module Service
     module Auth
-
       USER_INFO_AUTH_REQUIRED = [
         :scopes,
         :state
       ]
+
       def user_info_auth(params = {}, options = {})
         params = { scopes: 'auth_user', state: Alipay2::Utils.generate_batch_no }.merge(params)
         Alipay2::Utils.check_params(params, USER_INFO_AUTH_REQUIRED)
